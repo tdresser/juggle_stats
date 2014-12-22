@@ -1,14 +1,3 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="AppTheme" parent="android:Theme.Material">
-        <item name="android:colorPrimary">@color/primary</item>
-        <item name="android:colorPrimaryDark">@color/primary_dark</item>
-        <item name="android:colorAccent">@color/accent</item>
-    </style>
-
-    <color name="primary">#ff0000</color>
-    <color name="primary_pressed">#aa0000</color>
-    <color name="ripple">#000000</color>
-    <color name="primary_dark">#00ff00</color>
-    <color name="accent">#0000ff</color>
 </resources>
