@@ -57,8 +57,6 @@ public class RecordButtonFragment extends Fragment {
                 mStartRecordingButton.setVisibility(View.VISIBLE);
                 mStopRecordingButton.setVisibility(View.GONE);
                 mSaveRecordingButton.setVisibility(View.GONE);
-
-                mDataCollector.logRecording();
                 mDataSender.sendMessage("/send_data", mDataCollector.getRecordedDataAsString());
                 mDataCollector.clearRecording();
             }
