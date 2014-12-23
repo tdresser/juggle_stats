@@ -13,6 +13,7 @@ public class RecordButtonFragment extends Fragment {
     private Button mSaveRecordingButton;
 
     private DataCollector mDataCollector;
+    private DataSender mDataSender;
 
     public RecordButtonFragment() {
     }
@@ -23,6 +24,7 @@ public class RecordButtonFragment extends Fragment {
         View fragment = inflater.inflate(R.layout.fragment_record_button, container, false);
 
         mDataCollector = new DataCollector(getActivity());
+        mDataSender = new DataSender(getActivity());
         mStartRecordingButton = (Button) fragment.findViewById((R.id.button_start_recording));
         mStopRecordingButton = (Button) fragment.findViewById((R.id.button_stop_recording));
         mSaveRecordingButton = (Button) fragment.findViewById((R.id.button_save_recording));
@@ -56,9 +58,17 @@ public class RecordButtonFragment extends Fragment {
                 mStopRecordingButton.setVisibility(View.GONE);
                 mSaveRecordingButton.setVisibility(View.GONE);
 
-                mDataCollector.saveRecording();
+                mDataCollector.logRecording();
+                mDataSender.sendMessage("/send_data", mDataCollector.getRecordedDataAsString());
+                mDataCollector.clearRecording();
             }
         });
         return fragment;
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mDataSender.cleanup();
     }
 }

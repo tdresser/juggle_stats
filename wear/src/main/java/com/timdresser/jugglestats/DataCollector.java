@@ -59,10 +59,21 @@ public class DataCollector implements SensorEventListener {
         mSensorManager.unregisterListener(this);
     }
 
-    public void saveRecording() {
+    public void clearRecording() {
+        mEntries.clear();
+    }
+
+    public void logRecording() {
         for (Entry entry : mEntries) {
             Log.v("TAG", entry.toString());
         }
-        mEntries.clear();
+    }
+
+    public String getRecordedDataAsString() {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (Entry entry : mEntries) {
+            stringBuilder.append(entry.toString() + "\n");
+        }
+        return stringBuilder.toString();
     }
 }
