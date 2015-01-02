@@ -24,9 +24,17 @@ titles = ["ax", "ay", "az", "gx", "gy", "gz"]
 
 matplotlib.rcParams.update({'font.size': 22})
 
+#plt.figure(figsize=(20, 10))
+#plt.plot(sqrt(data.Ax * data.Ax + data.Ay * data.Ay + data.Az * data.Az))
+
+fig = plt.figure(figsize=(20, 30))
+fig.subplots_adjust(wspace=0.5, hspace=0.5)
+
 for i in range(0, len(series)):
-    fig = plt.figure(figsize=(20, 10))
-    plt.plot(data.TimeStamp, series[i])
+    ax = fig.add_subplot(6, 1, i + 1)
+    ax.plot(data.TimeStamp, series[i])
     plt.title(titles[i])
     plt.ylabel(titles[i])
     plt.xlabel("Time")
+
+plt.savefig("test.png")
