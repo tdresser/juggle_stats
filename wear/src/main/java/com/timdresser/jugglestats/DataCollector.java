@@ -32,7 +32,7 @@ public class DataCollector implements SensorEventListener {
 
         @Override
         public String toString() {
-            return String.format("%d: %f, %f, %f, %f, %f, %f", mTimeStamp, mAx, mAy, mAz, mGx, mGy, mGz);
+            return String.format("%d, %f, %f, %f, %f, %f, %f", mTimeStamp, mAx, mAy, mAz, mGx, mGy, mGz);
         }
     }
 
@@ -75,8 +75,8 @@ public class DataCollector implements SensorEventListener {
 
     public void startRecording() {
         mEntries.clear();
-        mSensorManager.registerListener(this, mSensorAccelerometer, SensorManager.SENSOR_DELAY_NORMAL);
-        mSensorManager.registerListener(this, mSensorGyro, SensorManager.SENSOR_DELAY_NORMAL);
+        mSensorManager.registerListener(this, mSensorAccelerometer, SensorManager.SENSOR_DELAY_FASTEST);
+        mSensorManager.registerListener(this, mSensorGyro, SensorManager.SENSOR_DELAY_FASTEST);
     }
 
     public void stopRecording() {
@@ -89,6 +89,7 @@ public class DataCollector implements SensorEventListener {
 
     public String getRecordedDataAsString() {
         StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("TimeStamp, Ax, Ay, Az, Gx, Gy, Gz\n");
         for (Map.Entry<Long, Entry> mapEntry : mEntries.entrySet()) {
             stringBuilder.append(mapEntry.getValue().toString() + "\n");
         }
