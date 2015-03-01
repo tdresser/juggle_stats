@@ -3,9 +3,13 @@ import matplotlib.pyplot as plt
 import matplotlib
 import os
 from scipy import signal
+import sys
 
-os.chdir("C:/Users/tim/Desktop/projects/juggle_stats/post_processing")
-data = pd.read_csv("sample.csv")
+in_file = sys.argv[1]
+out_file = sys.argv[2]
+
+data = pd.read_csv(in_file)
+data.TimeStamp = data.TimeStamp - data.TimeStamp.min()
 data.TimeStamp = data.TimeStamp / 1000000000
 data = data.rename(columns=lambda x: x.strip())
 data = data.sort('TimeStamp')
@@ -36,5 +40,6 @@ for i in range(0, len(series)):
     plt.title(titles[i])
     plt.ylabel(titles[i])
     plt.xlabel("Time")
+#    plt.axis([10, 15, -25, 25])
 
-plt.savefig("test.png")
+plt.savefig(out_file)
